@@ -58,7 +58,8 @@ The existing Git repository is rooted above this application; its application pa
 
 ## Operational limits
 
+Verified deployment: `https://qrflow-ashy.vercel.app` (Vercel deployment `dpl_DTA6sAE7ZTG8bXafuJ3iFoHTXBT4`, application commit `c8e6886`). Lint, TypeScript production build, 42 unit tests, and three public browser tests passed. The authenticated lifecycle test is explicitly skipped until a normal signed-in test session is available. Google consent registration and provider enablement are still pending; the deployed UI alone does not establish that Google login works.
+
 Google provider credentials and console configuration are external setup requirements. A build passing does not verify a live Google login. The issue-tracker abuse-report fallback is public: configure `ABUSE_REPORT_EMAIL` with an operator-monitored address for private reports. Dynamic link services can be used for phishing; reports need operator review. The database quotas bound stored events, not all incoming traffic or infrastructure costs. There is no automatic link reputation checking, retention cleanup, account-deletion UI, or availability guarantee.
 
 Payments, subscriptions, teams, custom domains, logos in QR codes, bulk generation, geolocation, AI, and background workers are intentionally deferred.
-
