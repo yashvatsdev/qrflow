@@ -45,7 +45,14 @@ export function CodeDetail({ code, origin }: { code: QRCode; origin: string }) {
         <button className="text-button" onClick={() => setEditing(false)}>
           ← Back to details
         </button>
-        <QREditor origin={origin} code={code} />
+        <QREditor
+          origin={origin}
+          code={code}
+          onDone={() => {
+            setEditing(false);
+            router.refresh();
+          }}
+        />
       </>
     );
   return (

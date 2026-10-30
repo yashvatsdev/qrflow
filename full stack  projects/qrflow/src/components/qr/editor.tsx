@@ -5,7 +5,15 @@ import { Check, ArrowLeft, ArrowRight, Link2 } from "lucide-react";
 import { QRPreview, Downloads } from "./preview";
 import { createSchema, defaultStyle } from "@/lib/validation/qr";
 import type { QRCode, QRStyle } from "@/types/qr";
-export function QREditor({ origin, code }: { origin: string; code?: QRCode }) {
+export function QREditor({
+  origin,
+  code,
+  onDone,
+}: {
+  origin: string;
+  code?: QRCode;
+  onDone?: () => void;
+}) {
   const router = useRouter();
   const [step, setStep] = useState(0);
   const [name, setName] = useState(code?.name || "");
@@ -82,7 +90,9 @@ export function QREditor({ origin, code }: { origin: string; code?: QRCode }) {
         />
         <button
           className="text-button"
-          onClick={() => router.push(`/dashboard/codes/${saved.id}`)}
+          onClick={() =>
+            onDone ? onDone() : router.push(`/dashboard/codes/${saved.id}`)
+          }
         >
           View QR details <ArrowRight size={16} />
         </button>
