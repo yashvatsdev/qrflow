@@ -1,0 +1,10 @@
+.env*
+!.env.example
+.e2e/
+.pnpm-store/
+.taste-skill/
+test-results/
+playwright-report/
+debug.log
+tests/
+e2e/
