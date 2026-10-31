@@ -1,5 +1,14 @@
 import { userContext } from "@/lib/qr/service";
-export default async function Settings() {
+import { Suspense } from "react";
+import { WorkspaceLoading } from "@/components/dashboard/workspace";
+export default function Settings() {
+  return (
+    <Suspense fallback={<WorkspaceLoading />}>
+      <SettingsData />
+    </Suspense>
+  );
+}
+async function SettingsData() {
   const { user, db } = await userContext();
   const { data } = await db
     .from("profiles")

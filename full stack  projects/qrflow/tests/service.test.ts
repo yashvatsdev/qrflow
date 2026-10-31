@@ -7,6 +7,7 @@ import {
   updateCode,
   deleteCode,
   listCodes,
+  listCodeSummaries,
   scanStats,
   type Context,
 } from "@/lib/qr/service";
@@ -66,6 +67,21 @@ describe("owned QR service", () => {
     expect(chain.eq).toHaveBeenCalledWith("id", "id");
     expect(chain.update).toHaveBeenCalledWith({
       destination_url: "https://example.com/new",
+    });
+  });
+  it("aggregates list scan counts without fetching events or losing owner scope", async () => {
+    const { ctx, chain } = context([
+      { id: "first", name: "Menu", scan_events: [{ count: 23 }] },
+      { id: "second", name: "Ticket", scan_events: [{ count: 0 }] },
+    ]);
+    expect(await listCodeSummaries(ctx)).toEqual([
+      { id: "first", name: "Menu", recorded_scans: 23 },
+      { id: "second", name: "Ticket", recorded_scans: 0 },
+    ]);
+    expect(chain.select).toHaveBeenCalledWith("*,scan_events(count)");
+    expect(chain.eq).toHaveBeenCalledWith("user_id", "owner");
+    expect(chain.order).toHaveBeenCalledWith("created_at", {
+      ascending: false,
     });
   });
   it("scopes deletion and hides records owned by others", async () => {

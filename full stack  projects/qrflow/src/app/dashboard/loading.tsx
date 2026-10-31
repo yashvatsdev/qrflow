@@ -1,7 +1,4 @@
+import { WorkspaceLoading } from "@/components/dashboard/workspace";
 export default function Loading() {
-  return (
-    <div className="loading-state" role="status">
-      Loading your workspace…
-    </div>
-  );
+  return <WorkspaceLoading />;
 }

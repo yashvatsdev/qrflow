@@ -1,7 +1,16 @@
 import { appUrl } from "@/lib/config";
 import { QREditor } from "@/components/qr/editor";
 import { connection } from "next/server";
-export default async function NewCode() {
+import { Suspense } from "react";
+import { WorkspaceLoading } from "@/components/dashboard/workspace";
+export default function NewCode() {
+  return (
+    <Suspense fallback={<WorkspaceLoading />}>
+      <NewCodeContent />
+    </Suspense>
+  );
+}
+async function NewCodeContent() {
   await connection();
   return (
     <>

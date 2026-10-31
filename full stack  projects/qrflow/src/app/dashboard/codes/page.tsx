@@ -1,8 +1,18 @@
 import Link from "next/link";
+import { Suspense } from "react";
+import { WorkspaceLoading } from "@/components/dashboard/workspace";
 import { Plus } from "lucide-react";
-import { listCodes, userContext } from "@/lib/qr/service";
+import { listCodeSummaries, userContext } from "@/lib/qr/service";
+import { appUrl } from "@/lib/config";
 import { CodeList } from "@/components/qr/list";
-export default async function Codes() {
+export default function Codes() {
+  return (
+    <Suspense fallback={<WorkspaceLoading />}>
+      <CodesData />
+    </Suspense>
+  );
+}
+async function CodesData() {
   return (
     <>
       <div className="page-heading">
@@ -17,7 +27,10 @@ export default async function Codes() {
           <Plus size={17} /> Create QR code
         </Link>
       </div>
-      <CodeList codes={await listCodes(await userContext())} />
+      <CodeList
+        codes={await listCodeSummaries(await userContext())}
+        origin={appUrl()}
+      />
     </>
   );
 }

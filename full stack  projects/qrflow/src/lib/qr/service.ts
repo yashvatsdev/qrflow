@@ -2,7 +2,7 @@ import "server-only";
 import { createClient } from "@/lib/supabase/server";
 import { generateSlug } from "./slug";
 import { HttpError } from "@/lib/security/http";
-import type { QRCode, ScanStats } from "@/types/qr";
+import type { QRCode, QRCodeSummary, ScanStats } from "@/types/qr";
 export async function userContext() {
   const db = await createClient();
   const {
@@ -50,6 +50,23 @@ export async function getCode(
   dbError(error);
   if (!data) throw new HttpError(404, "NOT_FOUND", "QR code not found.");
   return data as QRCode;
+}
+export async function listCodeSummaries({
+  db,
+  user,
+}: Context): Promise<QRCodeSummary[]> {
+  // Aggregate through the existing foreign key. Both tables retain owner RLS;
+  // this avoids one analytics request per row and never downloads event records.
+  const { data, error } = await db
+    .from("qr_codes")
+    .select("*,scan_events(count)")
+    .eq("user_id", user.id)
+    .order("created_at", { ascending: false });
+  dbError(error);
+  return (data || []).map(({ scan_events, ...code }) => ({
+    ...code,
+    recorded_scans: scan_events[0]?.count ?? 0,
+  })) as QRCodeSummary[];
 }
 export async function createCode({ db, user }: Context, input: unknown) {
   const { data, error } = await db

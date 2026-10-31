@@ -15,6 +15,7 @@ export type QRCode = {
   updated_at: string;
 };
 export type DailyScans = { date: string; scans: number };
+export type QRCodeSummary = QRCode & { recorded_scans: number };
 export type ScanStats = {
   total: number;
   last7: number;

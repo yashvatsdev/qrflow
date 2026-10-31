@@ -1,14 +1,24 @@
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
+import { WorkspaceLoading } from "@/components/dashboard/workspace";
 import { appUrl } from "@/lib/config";
 import { getCode, scanStats, userContext } from "@/lib/qr/service";
 import { idSchema } from "@/lib/validation/qr";
 import { HttpError } from "@/lib/security/http";
 import { CodeDetail } from "@/components/qr/detail";
-import { ScanChart } from "@/components/analytics/chart";
-export default async function Details({
+export default function Details(props: Parameters<typeof DetailsData>[0]) {
+  return (
+    <Suspense fallback={<WorkspaceLoading />}>
+      <DetailsData {...props} />
+    </Suspense>
+  );
+}
+async function DetailsData({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ edit?: string }>;
 }) {
   const { id } = await params;
   if (!idSchema.safeParse(id).success) notFound();
@@ -33,8 +43,12 @@ export default async function Details({
           </p>
         </div>
       </div>
-      <CodeDetail code={code} origin={appUrl()} />
-      <ScanChart daily={stats.daily} />
+      <CodeDetail
+        code={code}
+        origin={appUrl()}
+        stats={stats}
+        initialEditing={(await searchParams).edit === "1"}
+      />
     </>
   );
 }

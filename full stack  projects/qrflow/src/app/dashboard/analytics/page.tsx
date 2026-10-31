@@ -1,6 +1,15 @@
 import { scanStats, userContext } from "@/lib/qr/service";
+import { Suspense } from "react";
 import { ScanChart } from "@/components/analytics/chart";
-export default async function Analytics() {
+import { MetricCard, WorkspaceLoading } from "@/components/dashboard/workspace";
+export default function Analytics() {
+  return (
+    <Suspense fallback={<WorkspaceLoading />}>
+      <AnalyticsData />
+    </Suspense>
+  );
+}
+async function AnalyticsData() {
   const stats = await scanStats(await userContext());
   return (
     <>
@@ -21,10 +30,13 @@ export default async function Analytics() {
           ["Last 7 days", stats.last7],
           ["Last 30 days", stats.last30],
         ].map(([name, value]) => (
-          <article className="metric" key={name}>
-            <span>{name}</span>
-            <strong>{Number(value).toLocaleString()}</strong>
-          </article>
+          <MetricCard
+            label={String(name)}
+            value={Number(value)}
+            key={name}
+            kind="scans"
+            note="Recorded requests · UTC"
+          />
         ))}
       </div>
       <ScanChart daily={stats.daily} />

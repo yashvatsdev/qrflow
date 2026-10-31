@@ -1,11 +1,24 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { Plus, ArrowUpRight } from "lucide-react";
-import { listCodes, scanStats, userContext } from "@/lib/qr/service";
+import { listCodeSummaries, scanStats, userContext } from "@/lib/qr/service";
+import { appUrl } from "@/lib/config";
+import { MetricCard, WorkspaceLoading } from "@/components/dashboard/workspace";
 import { ScanChart } from "@/components/analytics/chart";
 import { CodeList } from "@/components/qr/list";
-export default async function Overview() {
+export default function Overview() {
+  return (
+    <Suspense fallback={<WorkspaceLoading />}>
+      <OverviewData />
+    </Suspense>
+  );
+}
+async function OverviewData() {
   const ctx = await userContext();
-  const [codes, stats] = await Promise.all([listCodes(ctx), scanStats(ctx)]);
+  const [codes, stats] = await Promise.all([
+    listCodeSummaries(ctx),
+    scanStats(ctx),
+  ]);
   return (
     <>
       <div className="page-heading">
@@ -30,17 +43,25 @@ export default async function Overview() {
           ["Total recorded scans", stats.total],
           ["Scans in last 7 days", stats.last7],
         ].map(([label, value]) => (
-          <article className="metric" key={label}>
-            <span>{label}</span>
-            <strong>{Number(value).toLocaleString()}</strong>
-            <span className="metric-note">
-              {label === "Active QR codes"
+          <MetricCard
+            key={label}
+            label={String(label)}
+            value={Number(value)}
+            kind={
+              label === "Total QR codes"
+                ? "codes"
+                : label === "Active QR codes"
+                  ? "active"
+                  : "scans"
+            }
+            note={
+              label === "Active QR codes"
                 ? "Ready for the next scan"
                 : label === "Total QR codes"
                   ? "Made in your workspace"
-                  : "Recorded requests, not unique people"}
-            </span>
-          </article>
+                  : "Recorded requests, not unique people"
+            }
+          />
         ))}
       </div>
       <ScanChart daily={stats.daily} />
@@ -50,7 +71,7 @@ export default async function Overview() {
           View all <ArrowUpRight size={16} />
         </Link>
       </div>
-      <CodeList codes={codes.slice(0, 4)} compact />
+      <CodeList codes={codes.slice(0, 4)} origin={appUrl()} compact />
     </>
   );
 }

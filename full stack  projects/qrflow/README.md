@@ -29,10 +29,11 @@ The app uses a PKCE callback with a fixed dashboard destination, verified server
 
 ## Features
 
-- Responsive marketing site, live scannable demonstration, real privacy disclosure and abuse-report link.
+- Cinematic responsive landing page with GSAP scroll storytelling, Motion interactions, an editable local QR demonstration, six working feature previews, use-case tabs, and accessible FAQ/navigation. Real privacy disclosure and abuse-report link.
 - Google login, protected workspace, profile summary and logout.
 - Three-step creation, custom colors with contrast validation, fixed quiet zones, PNG (512/1024/2048 px) and SVG downloads.
 - QR search, status filters, details, edits, pause/resume, and confirmed deletion.
+- Refined dashboard with a collapsible sidebar, mobile drawer, profile menu, real metric cards, inline QR management actions, sorting, server-confirmed status changes, notifications, and loading skeletons. The split-pane three-step studio preserves permanent QR URLs while editing destinations; details include Overview, Analytics, and Settings tabs.
 - Permanent `/r/[slug]` links, uncached 302 redirects, paused/unknown/unavailable pages, and best-effort scan recording.
 - Owner-scoped aggregate analytics and daily UTC charts, including 7- and 30-day ranges and a readable data table.
 
@@ -49,6 +50,14 @@ pnpm build
 ```
 
 Vitest covers URL and input validation, QR decoding, slug entropy, API responses, ownership query scoping, quota handling, OAuth boundaries, and redirect behavior. Playwright covers the public pages, protected routes, errors, and responsive overflow. Its authenticated lifecycle test requires a normal signed-in browser state at the gitignored `.e2e/storage.json`; without it, that test explicitly skips. Run against a deployed origin by setting `E2E_BASE_URL`. Do not commit session files or enable sensitive traces.
+
+`e2e/workspace-components.spec.ts` uses the existing Vitest/Vite dependency to run actual dashboard client components in an isolated Playwright fixture server. Its deterministic test records and intercepted API responses are test-only: no fixture routes, sessions, or mock records are added to the Next.js app. These checks cover successful and failed mutations, confirmation/cancel behavior, form persistence, stable QR images, keyboard navigation, 320–1440px layouts, reduced motion, and Axe accessibility checks. They supplement the authenticated lifecycle test; they do not substitute for verifying real CRUD against Supabase. Per-code list counts use `scan_events(count)` through the existing foreign key with owner filtering and RLS, rather than downloading events or making one stats request per row.
+
+Local dashboard verification (2026-10-31): lint, type checking, production build, 43 unit tests, and 14 browser tests passed; the authenticated lifecycle test skipped without saved state. Axe reported no WCAG A/AA violations in the sampled overview, list, studio, detail, empty, and confirmation-dialog states. Read-only checks on the dedicated Supabase project confirmed owner analytics, zero visibility under another user, RLS, anonymous table restrictions, and immutable identity permissions. The user confirmed the redesigned local overview loads real account data after sign-in. Windows/Brave automation failed to initialize in this session, so a fresh signed-in CRUD lifecycle through the redesigned UI remains unverified. This dashboard redesign has not been deployed.
+
+The landing-page tests also exercise destination validation and unchanged QR payloads, simulated scans, all six feature controls, PNG decoding and SVG exports, tab keyboard navigation, FAQ state, mobile dialog behavior, desktop pin progression/resize cleanup, and reduced motion. Marketing destination changes, scans, and charts are clearly labelled local simulations; they do not write account data. Every marketing QR encodes the fixed public project repository URL. Desktop story pinning requires at least 1024×720 and no reduced-motion preference; other layouts show all four scenes in natural reading order. All landing CSS is scoped to `.qrflow-landing` to preserve the workspace UI.
+
+Local landing verification (2026-10-31): lint, type checking, production build, 42 unit tests, and 9 browser tests passed. The authenticated lifecycle test skipped because no saved session was supplied. Overflow checks covered widths from 320 to 1920 pixels; screenshots were reviewed at mobile, tablet, and desktop sizes. Axe WCAG A/AA checks reported no violations in the sampled feature panels at 320, 768, and 1440 pixels, and in the open mobile dialog. These automated checks complement keyboard and visual review; they do not certify every possible accessibility state. This landing redesign has not been deployed.
 
 ## Deployment
 

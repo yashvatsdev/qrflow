@@ -16,7 +16,14 @@ export function QRPreview({
   const [error, setError] = useState(false);
   useEffect(() => {
     let active = true;
-    QR.toDataURL(url, { ...qrOptions(style), width: 320 })
+    QR.toDataURL(url, {
+      ...qrOptions({
+        foreground: style.foreground,
+        background: style.background,
+        resolution: 320,
+      }),
+      width: 320,
+    })
       .then((data) => {
         if (active) {
           setSrc(data);
@@ -29,7 +36,7 @@ export function QRPreview({
     return () => {
       active = false;
     };
-  }, [url, style]);
+  }, [url, style.foreground, style.background]);
   // Data URLs are generated locally and do not need image optimization.
   return error ? (
     <p role="alert">Unable to render this QR code.</p>
@@ -56,9 +63,14 @@ export function Downloads({
   style: QRStyle;
 }) {
   const [error, setError] = useState("");
+  const [busy, setBusy] = useState<"png" | "svg" | null>(null);
+  const [message, setMessage] = useState("");
   async function download(format: "png" | "svg") {
+    if (busy) return;
+    setBusy(format);
     try {
       setError("");
+      setMessage("");
       const data =
         format === "png"
           ? await QR.toDataURL(url, qrOptions(style))
@@ -72,21 +84,37 @@ export function Downloads({
       a.href = data;
       a.download = `${name.replace(/[^a-z0-9_-]/gi, "-") || "qrflow"}.${format}`;
       a.click();
+      setMessage(`${format.toUpperCase()} download started.`);
       if (format === "svg") setTimeout(() => URL.revokeObjectURL(data), 1000);
     } catch {
       setError("Download failed. Please try again.");
+    } finally {
+      setBusy(null);
     }
   }
   return (
     <>
       <div className="button-row">
-        <button className="button primary" onClick={() => download("png")}>
-          Download PNG
+        <button
+          className="button primary"
+          disabled={!!busy}
+          onClick={() => download("png")}
+        >
+          {busy === "png" ? "Preparing PNG…" : "Download PNG"}
         </button>
-        <button className="button" onClick={() => download("svg")}>
-          Download SVG
+        <button
+          className="button"
+          disabled={!!busy}
+          onClick={() => download("svg")}
+        >
+          {busy === "svg" ? "Preparing SVG…" : "Download SVG"}
         </button>
       </div>
+      {message && (
+        <p role="status" className="dw-download-feedback">
+          {message}
+        </p>
+      )}
       {error && (
         <p role="alert" className="error-text">
           {error}

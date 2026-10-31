@@ -1,0 +1,2264 @@
+.qrflow-landing {
+  --lp-text: #f9fafb;
+  color: var(--lp-text);
+  background: #0b0f14;
+  overflow: clip;
+  isolation: isolate;
+}
+.qrflow-landing > main,
+.qrflow-landing > .lp-footer {
+  position: relative;
+  z-index: 1;
+}
+.qrflow-landing .lp-ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.qrflow-landing .lp-ambient-grid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  mask-image: linear-gradient(180deg, #0009, #0004 55%, #0009);
+}
+.qrflow-landing .lp-ambient-glow {
+  position: absolute;
+  width: min(70vw, 900px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  animation: lp-ambient-drift 26s ease-in-out infinite alternate;
+}
+.qrflow-landing .lp-ambient-glow-blue {
+  top: -25%;
+  right: -10%;
+  background: radial-gradient(circle, #3b82f615, transparent 65%);
+}
+.qrflow-landing .lp-ambient-glow-cyan {
+  bottom: -40%;
+  left: -20%;
+  background: radial-gradient(circle, #06b6d40d, transparent 65%);
+  animation-duration: 32s;
+  animation-delay: -12s;
+}
+.qrflow-landing .lp-ambient-modules {
+  animation: lp-ambient-breathe 12s ease-in-out infinite alternate;
+}
+.qrflow-landing .lp-ambient-signal {
+  stroke-dasharray: 36 1900;
+  stroke-dashoffset: 1936;
+  opacity: 0.35;
+  animation: lp-ambient-flow 22s linear infinite;
+}
+.qrflow-landing .lp-ambient-signal-two {
+  animation-delay: -8s;
+  animation-duration: 28s;
+  opacity: 0.22;
+}
+.qrflow-landing .lp-ambient-signal-three {
+  animation-delay: -15s;
+  animation-duration: 32s;
+  opacity: 0.18;
+}
+.qrflow-landing .lp-ambient:is([data-paused="true"], [data-hidden="true"]) * {
+  animation-play-state: paused !important;
+}
+.qrflow-landing .lp-motion-toggle {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 8px 11px;
+  border: 1px solid #273444;
+  border-radius: 6px;
+  background: #0b0f14ed;
+  color: #9ca3af;
+  font-size: 10px;
+  backdrop-filter: blur(8px);
+}
+.qrflow-landing .lp-motion-toggle:hover {
+  color: #9dc8ff;
+  border-color: #52637a;
+}
+@keyframes lp-ambient-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-8%, 12%, 0);
+  }
+}
+@keyframes lp-ambient-breathe {
+  from {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0.85;
+    transform: translateY(-8px);
+  }
+}
+@keyframes lp-ambient-flow {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@media (max-width: 699px) {
+  .qrflow-landing .lp-ambient-grid {
+    opacity: 0.65;
+  }
+  .qrflow-landing .lp-ambient-signal-three {
+    display: none;
+  }
+  .qrflow-landing .lp-motion-toggle {
+    bottom: 10px;
+    right: 10px;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px;
+  }
+  .qrflow-landing .lp-motion-toggle span {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .qrflow-landing .lp-ambient * {
+    animation: none !important;
+  }
+  .qrflow-landing .lp-ambient-signal {
+    opacity: 0.08;
+    stroke-dasharray: none;
+  }
+  .qrflow-landing .lp-motion-toggle {
+    display: none;
+  }
+}
+.qrflow-landing a {
+  text-decoration: none;
+}
+.qrflow-landing button {
+  cursor: pointer;
+}
+.qrflow-landing :is(a, button, input, [tabindex]):focus-visible {
+  outline: 2px solid #9dc8ff;
+  outline-offset: 5px;
+}
+.qrflow-landing .lp-wrap {
+  width: min(1440px, calc(100% - 112px));
+  margin-inline: auto;
+}
+.qrflow-landing :is(h1, h2, h3, p) {
+  margin: 0;
+}
+.qrflow-landing .lp-muted {
+  color: #9ca3af;
+}
+.qrflow-landing .lp-ice {
+  color: #9dc8ff;
+}
+.qrflow-landing .lp-mono {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.09em;
+  line-height: 1.5;
+}
+.qrflow-landing .lp-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #b9c7d9;
+  letter-spacing: 0.025em;
+}
+.qrflow-landing .lp-eyebrow i,
+.qrflow-landing .lp-window-bar i,
+.qrflow-landing .lp-code-state i {
+  display: inline-block;
+  height: 6px;
+  width: 6px;
+  border-radius: 50%;
+  background: #06b6d4;
+  box-shadow: 0 0 15px #06b6d438;
+}
+.qrflow-landing .lp-caption {
+  font-size: 11px;
+  color: #9ca3af;
+  line-height: 1.6;
+}
+.qrflow-landing .lp-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 12px 20px;
+  border: 1px solid #344358;
+  border-radius: 7px;
+  color: #f9fafb;
+  background: #172131;
+  font-size: 13px;
+  font-weight: 550;
+  line-height: 1.3;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.qrflow-landing .lp-button:hover {
+  background: #223149;
+  border-color: #6380a4;
+}
+.qrflow-landing .lp-primary {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: #0b0f14;
+  box-shadow:
+    inset 0 1px 0 #ffffff20,
+    0 4px 20px #3b82f618;
+}
+.qrflow-landing .lp-primary:hover {
+  background: #60a5fa;
+  border-color: #60a5fa;
+  box-shadow: 0 4px 26px #3b82f62b;
+}
+.qrflow-landing .lp-button svg,
+.qrflow-landing .lp-text-link svg {
+  flex-shrink: 0;
+}
+.qrflow-landing .lp-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 0;
+  color: #d0deef;
+  background: none;
+  border: 0;
+}
+.qrflow-landing .lp-text-link:hover {
+  color: #9dc8ff;
+}
+.qrflow-landing .lp-skip {
+  position: fixed;
+  z-index: 200;
+  top: 10px;
+  left: 15px;
+  padding: 12px 20px;
+  border-radius: 6px;
+  background: #3b82f6;
+  transform: translateY(-150%);
+}
+.qrflow-landing .lp-skip:focus {
+  transform: translateY(0);
+}
+.qrflow-landing .lp-header {
+  position: sticky;
+  top: 0;
+  z-index: 80;
+  height: 84px;
+  border-bottom: 1px solid transparent;
+  transition:
+    background 0.25s,
+    border-color 0.25s;
+}
+.qrflow-landing .lp-header-scrolled {
+  background: #0b0f14ed;
+  backdrop-filter: blur(16px);
+  border-color: #273444;
+}
+.qrflow-landing .lp-nav {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.qrflow-landing .brand {
+  font-size: 21px;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.qrflow-landing .brand-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
+}
+.qrflow-landing .brand-mark svg {
+  width: 20px;
+}
+.qrflow-landing .lp-desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.qrflow-landing .lp-desktop-nav a {
+  position: relative;
+  color: #a7b0bd;
+  font-size: 12px;
+  padding: 15px 0;
+  transition: color 0.2s;
+}
+.qrflow-landing .lp-desktop-nav a:hover,
+.qrflow-landing .lp-desktop-nav a[aria-current] {
+  color: #f9fafb;
+}
+.qrflow-landing .lp-desktop-nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #3b82f6;
+  transform: scaleX(0);
+  transition: transform 0.2s;
+}
+.qrflow-landing .lp-desktop-nav a[aria-current]::after {
+  transform: scaleX(1);
+}
+.qrflow-landing .lp-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+.qrflow-landing .lp-login {
+  font-size: 12px;
+  color: #c7d0dd;
+}
+.qrflow-landing .lp-small {
+  min-height: 37px;
+  padding: 9px 15px;
+  font-size: 12px;
+}
+.qrflow-landing .lp-menu-button {
+  display: none;
+  padding: 10px;
+  background: none;
+  border: 0;
+  color: #fff;
+}
+.qrflow-landing .lp-mobile-menu {
+  position: fixed;
+  inset: 12px 12px auto auto;
+  width: min(420px, calc(100% - 24px));
+  max-height: calc(100dvh - 24px);
+  margin: 0;
+  color: #f9fafb;
+  background: #111827;
+  border: 1px solid #344358;
+  border-radius: 14px;
+  padding: 22px;
+}
+.qrflow-landing .lp-mobile-menu::backdrop {
+  background: #03070dd9;
+  backdrop-filter: blur(8px);
+}
+html:has(.lp-mobile-menu[open]) {
+  overflow: hidden;
+}
+.qrflow-landing .lp-mobile-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.qrflow-landing .lp-mobile-top button {
+  border: 0;
+  background: none;
+  color: #fff;
+  padding: 10px;
+}
+.qrflow-landing .lp-mobile-menu nav {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+.qrflow-landing .lp-mobile-menu nav a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #273444;
+}
+.qrflow-landing .lp-mobile-menu .lp-button {
+  width: 100%;
+}
+.qrflow-landing .lp-hero {
+  padding-top: 70px;
+  position: relative;
+}
+.qrflow-landing .lp-hero::before {
+  content: "";
+  width: 580px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #16335d32, transparent 68%);
+  position: absolute;
+  right: -120px;
+  top: -50px;
+  pointer-events: none;
+}
+.qrflow-landing .lp-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 33px;
+}
+.qrflow-landing .lp-hero-aside {
+  color: #8c99ab;
+}
+.qrflow-landing h1 {
+  font-size: clamp(48px, 6.9vw, 108px);
+  font-weight: 510;
+  line-height: 1.06;
+  letter-spacing: -0.067em;
+  max-width: 1280px;
+  position: relative;
+}
+.qrflow-landing .lp-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.09em;
+  margin-bottom: -0.05em;
+}
+.qrflow-landing .lp-line > span {
+  display: block;
+}
+.qrflow-landing .lp-hero-bottom {
+  display: grid;
+  grid-template-columns: 0.78fr 1.65fr;
+  gap: 6%;
+  align-items: center;
+  margin-top: 58px;
+}
+.qrflow-landing .lp-hero-copy > p {
+  font-size: clamp(16px, 1.45vw, 20px);
+  line-height: 1.65;
+  max-width: 315px;
+  color: #adb7c6;
+}
+.qrflow-landing .lp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  align-items: center;
+  margin: 29px 0 15px;
+}
+.qrflow-landing .lp-hero-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #273444;
+  margin-top: 54px;
+  padding-bottom: 26px;
+  color: #8a97aa;
+}
+.qrflow-landing .lp-hero-foot a {
+  padding: 8px;
+  border: 1px solid #273444;
+  border-radius: 50%;
+  color: #9dc8ff;
+}
+.qrflow-landing .lp-demo {
+  background: #111827;
+  border: 1px solid #30415a;
+  border-radius: 12px;
+  box-shadow: 0 24px 80px #00000038;
+  scroll-margin-top: 105px;
+}
+.qrflow-landing .lp-window-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid #273444;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.07em;
+  color: #b8c5d8;
+}
+.qrflow-landing .lp-window-bar > span:first-child {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.qrflow-landing .lp-demo-label {
+  color: #a6b5ca;
+  border: 1px solid #344358;
+  border-radius: 4px;
+  padding: 2px 6px;
+  letter-spacing: 0;
+}
+.qrflow-landing .lp-demo-body {
+  display: grid;
+  grid-template-columns: 1fr 34px 1.5fr;
+  align-items: center;
+  padding: 24px;
+  gap: 13px;
+}
+.qrflow-landing .lp-code-side {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 11px;
+  text-align: center;
+  min-width: 0;
+}
+.qrflow-landing .lp-code-side .lp-mono {
+  font-size: 8px;
+  color: #c4cfdc;
+}
+.qrflow-landing .lp-code-side small {
+  color: #9ca3af;
+  font-size: 9px;
+  max-width: 145px;
+  line-height: 1.5;
+}
+.qrflow-landing .lp-qr-frame {
+  width: min(100%, 180px);
+  aspect-ratio: 1;
+  border: 6px solid #fff;
+  border-radius: 7px;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 24px #0003;
+}
+.qrflow-landing .qr-image {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 0;
+}
+.qrflow-landing .qr-skeleton {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 0;
+}
+.qrflow-landing .lp-scan-beam {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.qrflow-landing .lp-connector {
+  width: 100%;
+  color: #52637a;
+}
+.qrflow-landing .lp-demo-controls {
+  min-width: 0;
+}
+.qrflow-landing .lp-demo-controls label {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #e0e8f5;
+}
+.qrflow-landing .lp-demo-controls label span {
+  color: #9ca3af;
+  font-size: 10px;
+  font-weight: 400;
+}
+.qrflow-landing .lp-demo input {
+  width: 100%;
+  min-height: 41px;
+  background: #0b0f14;
+  color: #e1eaf7;
+  border: 1px solid #344358;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 11px;
+}
+.qrflow-landing .lp-demo input[aria-invalid="true"] {
+  border-color: #fca5a5;
+}
+.qrflow-landing .lp-demo-controls .lp-button {
+  width: 100%;
+  margin-top: 9px;
+  min-height: 39px;
+  font-size: 11px;
+  padding: 9px;
+}
+.qrflow-landing .lp-demo-controls form > p {
+  font-size: 9px;
+  margin-top: 8px;
+}
+.qrflow-landing .lp-redirect {
+  margin-top: 18px;
+  padding-top: 15px;
+  border-top: 1px solid #273444;
+}
+.qrflow-landing .lp-redirect > span {
+  color: #8fa2ba;
+  font-size: 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.qrflow-landing .lp-redirect p {
+  min-height: 35px;
+  padding-top: 7px;
+  font-size: 11px;
+  color: #d8e4f4;
+  overflow-wrap: anywhere;
+}
+.qrflow-landing .lp-simulate {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.qrflow-landing .lp-simulate button {
+  font-size: 10px;
+  color: #9dc8ff;
+}
+.qrflow-landing .lp-simulate > span {
+  white-space: nowrap;
+  font-size: 9px;
+  color: #9ca3af;
+}
+.qrflow-landing .lp-simulate b {
+  color: #e2edff;
+  font-family: var(--font-geist-mono);
+}
+.qrflow-landing .lp-demo-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 9px;
+  line-height: 1.6;
+  min-height: 39px;
+  padding: 10px 20px;
+  color: #a3c5ed;
+  background: #0c1523;
+  border-top: 1px solid #273444;
+  border-radius: 0 0 12px 12px;
+  overflow-wrap: anywhere;
+}
+.qrflow-landing .lp-demo-status svg {
+  flex-shrink: 0;
+  color: #06b6d4;
+}
+.qrflow-landing .lp-section {
+  padding-block: 125px;
+}
+.qrflow-landing h2 {
+  font-size: clamp(38px, 4.6vw, 68px);
+  font-weight: 500;
+  line-height: 1.09;
+  letter-spacing: -0.055em;
+  margin-top: 22px;
+}
+.qrflow-landing .lp-section-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  align-items: flex-end;
+  margin-bottom: 55px;
+}
+.qrflow-landing .lp-section-heading > p {
+  max-width: 300px;
+  font-size: 15px;
+  color: #9ca3af;
+  line-height: 1.75;
+  padding-bottom: 4px;
+}
+.qrflow-landing .lp-lab {
+  display: grid;
+  grid-template-columns: 0.7fr 1.8fr;
+  border: 1px solid #273444;
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 500px;
+  background: #0d131c;
+}
+.qrflow-landing .lp-feature-tabs {
+  padding: 22px 0;
+  background: #111827;
+  border-right: 1px solid #273444;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.qrflow-landing .lp-feature-tabs button {
+  text-align: left;
+  min-height: 65px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 24px;
+  border: 0;
+  border-left: 2px solid transparent;
+  color: #9ca3af;
+  background: none;
+  font-size: 13px;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.qrflow-landing .lp-feature-tabs button[aria-selected="true"] {
+  color: #d5e7ff;
+  background: #192a43;
+  border-left-color: #3b82f6;
+}
+.qrflow-landing .lp-feature-tabs button:hover {
+  color: #f9fafb;
+  background: #1c293a;
+}
+.qrflow-landing .lp-tab-arrow {
+  margin-left: auto;
+  opacity: 0;
+}
+.qrflow-landing [aria-selected="true"] .lp-tab-arrow {
+  opacity: 1;
+}
+.qrflow-landing .lp-feature-panel {
+  padding: 40px 42px 18px;
+  min-width: 0;
+}
+.qrflow-landing .lp-feature-intro .lp-eyebrow {
+  font-size: 10px;
+  color: #9baec6;
+}
+.qrflow-landing h3 {
+  font-size: clamp(24px, 2.3vw, 34px);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+}
+.qrflow-landing .lp-feature-intro h3 {
+  margin-top: 13px;
+}
+.qrflow-landing .lp-feature-intro p {
+  color: #9ca3af;
+  font-size: 13px;
+  max-width: 500px;
+  margin-top: 12px;
+  line-height: 1.8;
+}
+.qrflow-landing .lp-feature-visual {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  align-items: center;
+  gap: 36px;
+  margin-top: 32px;
+  min-height: 216px;
+}
+.qrflow-landing .lp-feature-qr {
+  padding: 12px;
+  border: 1px solid #344358;
+  border-radius: 8px;
+  background: #111827;
+}
+.qrflow-landing .lp-feature-qr .qr-image {
+  border-radius: 4px;
+}
+.qrflow-landing .lp-feature-qr small {
+  display: block;
+  text-align: center;
+  font-size: 9px;
+  color: #9ca3af;
+  margin-top: 10px;
+}
+.qrflow-landing .lp-feature-options {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 13px;
+  min-width: 0;
+}
+.qrflow-landing .lp-feature-options > .lp-mono {
+  font-size: 9px;
+  color: #9ca3af;
+}
+.qrflow-landing .lp-mini-destination {
+  background: #111d2d;
+  border: 1px solid #2b3d55;
+  border-radius: 6px;
+  padding: 14px 11px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 11px;
+}
+.qrflow-landing .lp-mini-destination span {
+  overflow-wrap: anywhere;
+}
+.qrflow-landing .lp-mini-destination svg {
+  color: #9dc8ff;
+  flex-shrink: 0;
+}
+.qrflow-landing .lp-mini-destination svg:last-child {
+  margin-left: auto;
+  color: #06b6d4;
+}
+.qrflow-landing .lp-feature-options .lp-button {
+  font-size: 11px;
+  padding: 10px;
+  min-height: 42px;
+}
+.qrflow-landing .lp-feature-options small {
+  font-size: 10px;
+  color: #9ca3af;
+  line-height: 1.6;
+}
+.qrflow-landing .lp-lab-status {
+  min-height: 32px;
+  color: #9dc8ff;
+  font-size: 11px;
+  padding-top: 13px;
+}
+.qrflow-landing .lp-color-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+}
+.qrflow-landing .lp-color-fields label {
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #a9b8cd;
+}
+.qrflow-landing .lp-color-fields input {
+  height: 36px;
+  width: 100%;
+  padding: 3px;
+  background: #1f2937;
+  border: 1px solid #344358;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.qrflow-landing .lp-color-fields span {
+  font-family: var(--font-geist-mono);
+  font-size: 10px;
+}
+.qrflow-landing .lp-error {
+  color: #fca5a5;
+  font-size: 11px;
+  line-height: 1.6;
+}
+.qrflow-landing .lp-color-valid {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #8ed6dc;
+}
+.qrflow-landing .lp-export .button-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0 0 12px;
+}
+.qrflow-landing .lp-export .button {
+  padding: 9px 11px;
+  min-height: 40px;
+  font-size: 11px;
+  color: #f9fafb;
+}
+.qrflow-landing .lp-export .button.primary {
+  color: #0b0f14;
+}
+.qrflow-landing .lp-export .button.primary:hover {
+  background: #60a5fa;
+}
+.qrflow-landing .lp-code-state {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #93d9df;
+  font-size: 13px;
+}
+.qrflow-landing .lp-code-state > span {
+  margin-left: auto;
+  color: #9ca3af;
+  font-size: 10px;
+}
+.qrflow-landing .lp-code-state.is-paused {
+  color: #e9c28c;
+}
+.qrflow-landing .lp-code-state.is-paused i {
+  background: #e9c28c;
+  box-shadow: none;
+}
+.qrflow-landing .lp-chart {
+  width: 100%;
+  min-width: 0;
+  padding: 23px;
+  background: #111827;
+  border: 1px solid #2d3e55;
+  border-radius: 9px;
+}
+.qrflow-landing .lp-feature-visual:has(.lp-chart) {
+  grid-template-columns: 1.6fr 1fr;
+  gap: 28px;
+}
+.qrflow-landing .lp-chart-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: space-between;
+}
+.qrflow-landing .lp-chart-top .lp-mono {
+  font-size: 8px;
+  color: #a9b8cd;
+}
+.qrflow-landing .lp-segment {
+  display: flex;
+  gap: 3px;
+  border: 1px solid #344358;
+  border-radius: 5px;
+  padding: 3px;
+}
+.qrflow-landing .lp-segment button {
+  min-height: 30px;
+  padding: 5px 7px;
+  font-size: 9px;
+  white-space: nowrap;
+  background: none;
+  border: 0;
+  color: #a8b5c8;
+  border-radius: 3px;
+}
+.qrflow-landing .lp-segment button[aria-pressed="true"] {
+  background: #253c5d;
+  color: #e5efff;
+}
+.qrflow-landing .lp-chart-value {
+  margin: 18px 0 13px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.qrflow-landing .lp-chart-value strong {
+  font-size: 38px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+}
+.qrflow-landing .lp-chart-value span {
+  font-size: 9px;
+  color: #9ca3af;
+}
+.qrflow-landing .lp-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.qrflow-landing .lp-chart-axis {
+  display: flex;
+  justify-content: space-between;
+  color: #9ca3af;
+  font-size: 8px;
+  margin-top: 8px;
+}
+.qrflow-landing .lp-chart > small {
+  font-size: 8px;
+  color: #9ca3af;
+  display: block;
+  margin-top: 14px;
+}
+.qrflow-landing .lp-chart-note {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.qrflow-landing .lp-chart-note svg {
+  color: #9dc8ff;
+}
+.qrflow-landing .lp-chart-note strong {
+  font-size: 15px;
+  font-weight: 500;
+}
+.qrflow-landing .lp-chart-note p {
+  font-size: 11px;
+  color: #9ca3af;
+  line-height: 1.8;
+}
+.qrflow-landing .lp-story {
+  background: #101722;
+  border-block: 1px solid #273444;
+  padding: 70px 0 35px;
+}
+.qrflow-landing .lp-story-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+}
+.qrflow-landing .lp-story-heading h2 {
+  font-size: clamp(30px, 3vw, 44px);
+  margin: 0;
+}
+.qrflow-landing .lp-story-progress {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-top: 42px;
+  padding-bottom: 18px;
+  color: #9ca3af;
+  font-size: 12px;
+}
+.qrflow-landing .lp-story-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #344358;
+}
+.qrflow-landing .lp-story-fill {
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: #9dc8ff;
+}
+.qrflow-landing .lp-scene {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9%;
+  align-items: center;
+  padding: 60px 0;
+}
+.qrflow-landing .lp-scene + .lp-scene {
+  border-top: 1px solid #273444;
+}
+.qrflow-landing .lp-scene-copy h3 {
+  font-size: clamp(65px, 8vw, 115px);
+  font-weight: 500;
+  letter-spacing: -0.065em;
+  line-height: 1.1;
+  margin: 19px 0;
+}
+.qrflow-landing .lp-scene-copy p {
+  max-width: 355px;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #a9b5c6;
+}
+.qrflow-landing .lp-scene-copy > .lp-mono {
+  display: block;
+  color: #8c9fb7;
+  margin-top: 32px;
+  font-size: 8px;
+}
+.qrflow-landing .lp-scene-visual {
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 320px;
+}
+.qrflow-landing .lp-story-code {
+  width: 100%;
+  max-width: 370px;
+  background: #0b0f14;
+  border: 1px solid #344358;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 20px 40px #0002;
+}
+.qrflow-landing .lp-story-code > .qr-image,
+.qrflow-landing .lp-story-code > .qr-skeleton {
+  width: 160px;
+  margin: 0 auto 24px;
+  border: 5px solid #fff;
+  border-radius: 5px;
+}
+.qrflow-landing .lp-story-code > div:not(.qr-skeleton) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.qrflow-landing .lp-story-code .lp-mono {
+  font-size: 9px;
+  color: #9ca3af;
+}
+.qrflow-landing .lp-story-code strong {
+  font-size: 14px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.qrflow-landing .lp-story-code .lp-code-state {
+  font-size: 10px;
+}
+.qrflow-landing .lp-story-code small {
+  display: block;
+  color: #9ca3af;
+  font-size: 8px;
+  margin-top: 20px;
+}
+.qrflow-landing .lp-menu-print {
+  background: #e4e8dd;
+  color: #263629;
+  padding: 30px;
+  width: 310px;
+  border-radius: 3px;
+  transform: rotate(-4deg);
+  box-shadow:
+    16px 18px 0 #243024,
+    0 24px 60px #0003;
+}
+.qrflow-landing .lp-menu-print > span {
+  font-family: var(--font-geist-mono);
+  font-size: 9px;
+  letter-spacing: 0.13em;
+}
+.qrflow-landing .lp-menu-print > strong {
+  display: block;
+  font-size: 36px;
+  line-height: 1.06;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  margin: 38px 0 25px;
+}
+.qrflow-landing .lp-print-rule {
+  height: 1px;
+  background: #82917d;
+  margin-bottom: 23px;
+}
+.qrflow-landing .lp-print-bottom {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.qrflow-landing .lp-print-bottom :is(.qr-image, .qr-skeleton) {
+  width: 83px;
+  height: 83px;
+}
+.qrflow-landing .lp-print-bottom p {
+  color: #263629;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.qrflow-landing .lp-print-bottom b {
+  display: block;
+  margin-top: 8px;
+  font-size: 7px;
+  letter-spacing: 0.04em;
+}
+.qrflow-landing .lp-menu-print > small {
+  display: block;
+  font-size: 8px;
+  margin-top: 23px;
+  color: #42553e;
+}
+.qrflow-landing .lp-scene-3 .lp-chart {
+  max-width: 480px;
+}
+.qrflow-landing .lp-story-scroll {
+  display: none;
+}
+.qrflow-landing .lp-story[data-pinned="true"] {
+  height: calc(100vh - 80px);
+  min-height: 650px;
+  max-height: 1000px;
+  padding-top: 40px;
+}
+.qrflow-landing [data-pinned="true"] .lp-scene-stage {
+  position: relative;
+  height: min(480px, calc(100vh - 290px));
+  min-height: 390px;
+}
+.qrflow-landing [data-pinned="true"] .lp-scene {
+  position: absolute;
+  inset: 0;
+  padding: 30px 0 15px;
+  border: 0;
+  pointer-events: none;
+}
+.qrflow-landing [data-pinned="true"] .lp-story-scroll {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #8c9fb7;
+  font-size: 8px;
+  margin-top: 20px;
+}
+.qrflow-landing .lp-use-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #273444;
+}
+.qrflow-landing .lp-use-tabs button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 17px 24px;
+  min-height: 52px;
+  color: #9ca3af;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  font-size: 13px;
+}
+.qrflow-landing .lp-use-tabs button[aria-selected="true"] {
+  color: #d5e7ff;
+  border-bottom-color: #3b82f6;
+}
+.qrflow-landing .lp-use-tabs button:hover {
+  color: #f9fafb;
+}
+.qrflow-landing .lp-use-content {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 9%;
+  align-items: center;
+}
+.qrflow-landing .lp-use-art {
+  padding: 42px;
+  background: #1b2823;
+  border-radius: 8px;
+  min-height: 470px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.qrflow-landing .lp-use-print {
+  background: #dce5d8;
+  color: #243c2a;
+  width: 310px;
+  padding: 27px;
+  transform: rotate(-5deg);
+  box-shadow:
+    10px 12px 0 #ffffff08,
+    0 30px 70px #0003;
+}
+.qrflow-landing .lp-print-brand {
+  font-family: var(--font-geist-mono);
+  font-size: 8px;
+  letter-spacing: 0.13em;
+}
+.qrflow-landing .lp-use-print > strong {
+  display: block;
+  white-space: pre-line;
+  font-size: 38px;
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 1.05;
+  margin: 38px 0 22px;
+}
+.qrflow-landing .lp-print-detail {
+  font-family: var(--font-geist-mono);
+  font-size: 6px;
+  letter-spacing: 0.06em;
+}
+.qrflow-landing .lp-use-code {
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+  margin-top: 28px;
+  border-top: 1px solid #61755c66;
+  padding-top: 18px;
+}
+.qrflow-landing .lp-use-code :is(.qr-image, .qr-skeleton) {
+  width: 75px;
+  height: 75px;
+}
+.qrflow-landing .lp-use-code > span {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 7px;
+  font-family: var(--font-geist-mono);
+}
+.qrflow-landing .lp-use-print > small {
+  font-size: 7px;
+  margin-top: 18px;
+  display: block;
+}
+.qrflow-landing .lp-art-event {
+  background: #231e39;
+}
+.qrflow-landing .lp-art-event .lp-use-print {
+  background: #cbc0ef;
+  color: #2c2251;
+  transform: rotate(4deg);
+}
+.qrflow-landing .lp-art-business {
+  background: #29251f;
+}
+.qrflow-landing .lp-art-business .lp-use-print {
+  background: #e5d7be;
+  color: #4c3823;
+  transform: rotate(-3deg);
+}
+.qrflow-landing .lp-art-creator {
+  background: #182635;
+}
+.qrflow-landing .lp-art-creator .lp-use-print {
+  background: #c3d9eb;
+  color: #233e55;
+  transform: rotate(3deg);
+}
+.qrflow-landing .lp-use-copy h3 {
+  font-size: clamp(30px, 3.2vw, 48px);
+  max-width: 450px;
+  margin-top: 22px;
+}
+.qrflow-landing .lp-use-copy > p {
+  max-width: 390px;
+  font-size: 15px;
+  color: #9ca3af;
+  line-height: 1.85;
+  margin-top: 23px;
+}
+.qrflow-landing .lp-use-destination {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  padding: 14px 0;
+  margin: 22px 0 10px;
+  color: #bdcde1;
+  font-size: 12px;
+  border-block: 1px solid #273444;
+}
+.qrflow-landing .lp-badge {
+  display: inline-flex;
+  color: #9dc8ff;
+  font-size: 10px;
+  padding: 3px 7px;
+  border: 1px solid #344e6e;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.qrflow-landing .lp-use-destination .lp-badge {
+  margin-left: auto;
+  font-size: 8px;
+}
+.qrflow-landing .lp-carousel-controls {
+  margin-top: 32px;
+  display: flex;
+  gap: 9px;
+  align-items: center;
+}
+.qrflow-landing .lp-carousel-controls > span {
+  color: #9ca3af;
+  margin-right: auto;
+  font-size: 8px;
+}
+.qrflow-landing .lp-carousel-controls button {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  color: #c9d6e9;
+  background: none;
+  border: 1px solid #344358;
+  border-radius: 50%;
+}
+.qrflow-landing .lp-carousel-controls button:hover {
+  background: #1f2937;
+}
+.qrflow-landing .lp-pricing {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12%;
+  border-top: 1px solid #273444;
+}
+.qrflow-landing .lp-pricing h2 {
+  font-size: clamp(50px, 6vw, 84px);
+}
+.qrflow-landing .lp-pricing > div > p {
+  font-size: 15px;
+  color: #9ca3af;
+  line-height: 1.85;
+  margin-top: 26px;
+}
+.qrflow-landing .lp-price-card {
+  border: 1px solid #344358;
+  border-radius: 12px;
+  padding: 35px;
+  background: #111827;
+}
+.qrflow-landing .lp-price-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  font-family: var(--font-geist-mono);
+  font-size: 10px;
+  color: #bdc9db;
+}
+.qrflow-landing .lp-price {
+  font-size: 70px;
+  line-height: 1;
+  margin: 28px 0 15px;
+  letter-spacing: -0.05em;
+}
+.qrflow-landing .lp-price > span {
+  font-size: 12px;
+  color: #9ca3af;
+  letter-spacing: 0;
+}
+.qrflow-landing .lp-price-card > p {
+  font-size: 12px !important;
+  margin-top: 0 !important;
+}
+.qrflow-landing .lp-price-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 26px 0;
+  padding: 26px 0 0;
+  border-top: 1px solid #273444;
+}
+.qrflow-landing .lp-price-card li {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  font-size: 12px;
+  color: #d2dceb;
+}
+.qrflow-landing .lp-price-card li svg {
+  color: #9dc8ff;
+  flex-shrink: 0;
+}
+.qrflow-landing .lp-price-card > .lp-button {
+  width: 100%;
+}
+.qrflow-landing .lp-price-card > small {
+  font-size: 10px;
+  line-height: 1.8;
+  color: #9ca3af;
+  display: block;
+  margin-top: 16px;
+}
+.qrflow-landing .lp-faq-section {
+  border-top: 1px solid #273444;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 10%;
+}
+.qrflow-landing .lp-faq-item {
+  border-bottom: 1px solid #273444;
+}
+.qrflow-landing .lp-faq-item:first-child {
+  border-top: 1px solid #273444;
+}
+.qrflow-landing .lp-faq-item h3 {
+  font-size: 14px;
+  font-weight: 450;
+  letter-spacing: 0;
+}
+.qrflow-landing .lp-faq-item button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  color: #e2e8f0;
+  width: 100%;
+  min-height: 76px;
+  padding: 24px 0;
+  text-align: left;
+  background: none;
+  border: 0;
+}
+.qrflow-landing .lp-faq-item button:hover {
+  color: #9dc8ff;
+}
+.qrflow-landing .lp-faq-item button svg {
+  flex-shrink: 0;
+  color: #9ca3af;
+  transition: transform 0.25s;
+}
+.qrflow-landing .lp-faq-answer {
+  overflow: hidden;
+}
+.qrflow-landing .lp-faq-answer p {
+  font-size: 13px;
+  color: #9ca3af;
+  line-height: 1.85;
+  padding: 0 32px 25px 0;
+}
+.qrflow-landing .lp-final {
+  position: relative;
+  border-block: 1px solid #273444;
+  text-align: center;
+  padding: 115px 0 105px;
+}
+.qrflow-landing .lp-final h2 {
+  font-size: clamp(65px, 8.5vw, 120px);
+  line-height: 1;
+  margin: 27px 0 35px;
+  position: relative;
+}
+.qrflow-landing .lp-final > p {
+  color: #9ca3af;
+  font-size: 12px;
+  margin-top: 18px;
+}
+.qrflow-landing .lp-final-mark {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  top: 100px;
+  right: 3%;
+  opacity: 0.11;
+  color: #9dc8ff;
+  pointer-events: none;
+}
+.qrflow-landing .lp-footer {
+  padding-block: 38px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.qrflow-landing .lp-footer > span {
+  color: #9ca3af;
+  font-size: 11px;
+}
+.qrflow-landing .lp-footer nav {
+  margin-left: auto;
+  display: flex;
+  gap: 24px;
+  font-size: 11px;
+  color: #b1bdce;
+}
+.qrflow-landing .lp-footer nav a {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 8px 0;
+}
+.qrflow-landing .lp-footer nav a:hover {
+  color: #9dc8ff;
+}
+.qrflow-landing .lp-footer > small {
+  color: #9ca3af;
+  font-size: 10px;
+}
+@media (min-width: 1600px) {
+  .qrflow-landing .lp-hero-bottom {
+    grid-template-columns: 0.85fr 1.3fr;
+    gap: 12%;
+  }
+  .qrflow-landing .lp-demo-body {
+    padding: 32px;
+    gap: 22px;
+  }
+  .qrflow-landing .lp-qr-frame {
+    width: 200px;
+  }
+}
+@media (max-width: 1199px) {
+  .qrflow-landing .lp-wrap {
+    width: calc(100% - 72px);
+  }
+  .qrflow-landing .lp-desktop-nav {
+    gap: 20px;
+  }
+  .qrflow-landing .lp-nav-actions {
+    gap: 18px;
+  }
+  .qrflow-landing .lp-hero-bottom {
+    gap: 5%;
+    grid-template-columns: 0.7fr 1.5fr;
+  }
+  .qrflow-landing .lp-demo-body {
+    padding: 20px;
+    gap: 10px;
+    grid-template-columns: 1fr 22px 1.5fr;
+  }
+  .qrflow-landing .lp-feature-panel {
+    padding: 32px 25px 18px;
+  }
+  .qrflow-landing .lp-feature-visual {
+    grid-template-columns: 150px 1fr;
+    gap: 22px;
+  }
+  .qrflow-landing .lp-feature-tabs button {
+    padding-inline: 18px;
+    font-size: 12px;
+    gap: 10px;
+  }
+  .qrflow-landing .lp-lab {
+    grid-template-columns: 0.7fr 1.8fr;
+  }
+  .qrflow-landing .lp-use-art {
+    padding: 35px;
+  }
+  .qrflow-landing .lp-use-content {
+    gap: 7%;
+  }
+}
+@media (max-width: 999px) {
+  .qrflow-landing .lp-header {
+    height: 76px;
+  }
+  .qrflow-landing .lp-desktop-nav {
+    display: none;
+  }
+  .qrflow-landing .lp-nav-actions {
+    margin-left: auto;
+  }
+  .qrflow-landing .lp-menu-button {
+    display: block;
+  }
+  .qrflow-landing .lp-hero {
+    padding-top: 55px;
+  }
+  .qrflow-landing h1 {
+    font-size: 8.3vw;
+  }
+  .qrflow-landing .lp-hero-aside {
+    display: none;
+  }
+  .qrflow-landing .lp-hero-bottom {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    margin-top: 36px;
+  }
+  .qrflow-landing .lp-hero-copy {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 30px;
+    align-items: center;
+  }
+  .qrflow-landing .lp-hero-copy > p {
+    max-width: 370px;
+    font-size: 17px;
+    grid-row: span 2;
+  }
+  .qrflow-landing .lp-actions {
+    margin: 0;
+    justify-content: flex-end;
+  }
+  .qrflow-landing .lp-hero-copy > .lp-caption {
+    text-align: right;
+  }
+  .qrflow-landing .lp-demo-body {
+    grid-template-columns: 1fr 50px 1.5fr;
+    padding: 28px;
+    gap: 20px;
+  }
+  .qrflow-landing .lp-qr-frame {
+    width: 200px;
+  }
+  .qrflow-landing .lp-demo-controls label {
+    font-size: 12px;
+  }
+  .qrflow-landing .lp-demo-controls input {
+    font-size: 12px;
+  }
+  .qrflow-landing .lp-demo-controls .lp-button {
+    min-height: 42px;
+    font-size: 12px;
+  }
+  .qrflow-landing .lp-code-side small {
+    max-width: none;
+  }
+  .qrflow-landing .lp-section {
+    padding-block: 85px;
+  }
+  .qrflow-landing h2 {
+    font-size: 45px;
+  }
+  .qrflow-landing .lp-section-heading > p {
+    font-size: 13px;
+    max-width: 230px;
+  }
+  .qrflow-landing .lp-feature-tabs button {
+    padding: 15px 14px;
+    gap: 10px;
+    font-size: 11px;
+    min-height: 60px;
+  }
+  .qrflow-landing .lp-feature-tabs button > svg:first-child {
+    width: 16px;
+  }
+  .qrflow-landing .lp-feature-tabs .lp-tab-arrow {
+    display: none;
+  }
+  .qrflow-landing .lp-feature-visual {
+    grid-template-columns: 135px 1fr;
+    gap: 20px;
+  }
+  .qrflow-landing .lp-feature-panel {
+    padding: 28px 25px 18px;
+  }
+  .qrflow-landing .lp-feature-intro h3 {
+    font-size: 27px;
+  }
+  .qrflow-landing .lp-feature-intro p {
+    font-size: 12px;
+  }
+  .qrflow-landing .lp-feature-visual:has(.lp-chart) {
+    grid-template-columns: 1fr;
+  }
+  .qrflow-landing .lp-chart-note {
+    display: none;
+  }
+  .qrflow-landing .lp-story {
+    padding-block: 55px 20px;
+  }
+  .qrflow-landing .lp-story-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .qrflow-landing .lp-story-heading h2 {
+    font-size: 38px;
+  }
+  .qrflow-landing .lp-story-progress {
+    display: none;
+  }
+  .qrflow-landing .lp-scene {
+    gap: 7%;
+    padding: 55px 0;
+  }
+  .qrflow-landing .lp-scene-copy h3 {
+    font-size: 74px;
+  }
+  .qrflow-landing .lp-scene-copy p {
+    font-size: 14px;
+  }
+  .qrflow-landing .lp-scene-copy > .lp-mono {
+    font-size: 7px;
+  }
+  .qrflow-landing .lp-menu-print {
+    width: 260px;
+    padding: 26px;
+  }
+  .qrflow-landing .lp-menu-print > strong {
+    font-size: 32px;
+  }
+  .qrflow-landing .lp-story-code {
+    padding: 25px;
+  }
+  .qrflow-landing .lp-story-code > .qr-image {
+    width: 135px;
+  }
+  .qrflow-landing .lp-use-tabs button {
+    padding-inline: 19px;
+    font-size: 12px;
+  }
+  .qrflow-landing .lp-use-content {
+    gap: 6%;
+  }
+  .qrflow-landing .lp-use-art {
+    padding: 30px;
+    min-height: 430px;
+  }
+  .qrflow-landing .lp-use-print {
+    padding: 24px;
+    width: 260px;
+  }
+  .qrflow-landing .lp-use-print > strong {
+    font-size: 32px;
+  }
+  .qrflow-landing .lp-use-copy h3 {
+    font-size: 33px;
+  }
+  .qrflow-landing .lp-use-copy > p {
+    font-size: 13px;
+  }
+  .qrflow-landing .lp-use-destination {
+    font-size: 10px;
+  }
+  .qrflow-landing .lp-pricing {
+    gap: 8%;
+  }
+  .qrflow-landing .lp-price-card {
+    padding: 25px;
+  }
+  .qrflow-landing .lp-price-top {
+    font-size: 8px;
+  }
+  .qrflow-landing .lp-faq-section {
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 8%;
+  }
+  .qrflow-landing .lp-faq-item h3 {
+    font-size: 13px;
+  }
+  .qrflow-landing .lp-footer {
+    gap: 20px;
+  }
+  .qrflow-landing .lp-footer > span {
+    display: none;
+  }
+  .qrflow-landing .lp-final-mark {
+    width: 180px;
+    right: 0;
+  }
+}
+@media (max-width: 699px) {
+  .qrflow-landing .lp-wrap {
+    width: calc(100% - 40px);
+  }
+  .qrflow-landing .lp-header {
+    height: 68px;
+  }
+  .qrflow-landing .lp-nav {
+    gap: 15px;
+  }
+  .qrflow-landing .lp-nav-actions .lp-login {
+    display: none;
+  }
+  .qrflow-landing .lp-small {
+    min-height: 36px;
+    padding: 9px 12px;
+    font-size: 11px;
+  }
+  .qrflow-landing .brand {
+    font-size: 20px;
+  }
+  .qrflow-landing .lp-menu-button {
+    padding: 8px 0 8px 8px;
+  }
+  .qrflow-landing .lp-hero {
+    padding-top: 38px;
+  }
+  .qrflow-landing .lp-hero-top {
+    margin-bottom: 25px;
+  }
+  .qrflow-landing .lp-eyebrow {
+    font-size: 11px;
+  }
+  .qrflow-landing h1 {
+    font-size: 8.7vw;
+    line-height: 1.12;
+    letter-spacing: -0.055em;
+  }
+  .qrflow-landing .lp-hero-bottom {
+    margin-top: 30px;
+    gap: 30px;
+  }
+  .qrflow-landing .lp-hero-copy {
+    display: block;
+  }
+  .qrflow-landing .lp-hero-copy > p {
+    font-size: 16px;
+    max-width: 330px;
+  }
+  .qrflow-landing .lp-actions {
+    justify-content: flex-start;
+    margin: 23px 0 13px;
+    gap: 18px;
+  }
+  .qrflow-landing .lp-hero-copy > .lp-caption {
+    text-align: left;
+  }
+  .qrflow-landing .lp-button {
+    min-height: 46px;
+    padding: 12px 17px;
+    font-size: 12px;
+  }
+  .qrflow-landing .lp-text-link {
+    font-size: 12px;
+  }
+  .qrflow-landing .lp-demo-body {
+    grid-template-columns: 1fr;
+    padding: 22px 20px;
+    gap: 20px;
+  }
+  .qrflow-landing .lp-code-side {
+    gap: 9px;
+  }
+  .qrflow-landing .lp-qr-frame {
+    width: 152px;
+  }
+  .qrflow-landing .lp-code-side .lp-mono {
+    font-size: 8px;
+  }
+  .qrflow-landing .lp-code-side small {
+    font-size: 9px;
+  }
+  .qrflow-landing .lp-connector {
+    display: none;
+  }
+  .qrflow-landing .lp-demo-controls label {
+    font-size: 12px;
+  }
+  .qrflow-landing .lp-demo-controls input {
+    font-size: 16px;
+    min-height: 44px;
+  }
+  .qrflow-landing .lp-demo-controls label span {
+    font-size: 10px;
+  }
+  .qrflow-landing .lp-demo-controls .lp-button {
+    min-height: 44px;
+    font-size: 12px;
+  }
+  .qrflow-landing .lp-demo-controls form > p {
+    font-size: 10px;
+  }
+  .qrflow-landing .lp-redirect > span {
+    font-size: 8px;
+  }
+  .qrflow-landing .lp-redirect p {
+    font-size: 12px;
+  }
+  .qrflow-landing .lp-simulate button {
+    min-height: 44px;
+    font-size: 12px;
+  }
+  .qrflow-landing .lp-simulate > span {
+    font-size: 10px;
+  }
+  .qrflow-landing .lp-demo-status {
+    font-size: 10px;
+    padding: 13px 16px;
+    align-items: flex-start;
+  }
+  .qrflow-landing .lp-demo-status svg {
+    margin-top: 2px;
+  }
+  .qrflow-landing .lp-window-bar {
+    padding: 12px 16px;
+    font-size: 8px;
+  }
+  .qrflow-landing .lp-hero-foot {
+    margin-top: 30px;
+    padding-bottom: 20px;
+  }
+  .qrflow-landing .lp-hero-foot > .lp-mono {
+    font-size: 7px;
+  }
+  .qrflow-landing .lp-section {
+    padding-block: 75px;
+  }
+  .qrflow-landing h2 {
+    font-size: 39px;
+    margin-top: 18px;
+  }
+  .qrflow-landing .lp-section-heading {
+    display: block;
+    margin-bottom: 30px;
+  }
+  .qrflow-landing .lp-section-heading > p {
+    margin-top: 22px;
+    max-width: 330px;
+    font-size: 14px;
+  }
+  .qrflow-landing .lp-lab {
+    display: flex;
+    flex-direction: column;
+    min-height: 600px;
+  }
+  .qrflow-landing .lp-feature-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
+    border-right: 0;
+    border-bottom: 1px solid #273444;
+  }
+  .qrflow-landing .lp-feature-tabs button {
+    min-height: 56px;
+    padding: 15px 12px;
+    border-left: 0;
+    border-bottom: 2px solid transparent;
+    gap: 9px;
+    font-size: 10px;
+  }
+  .qrflow-landing .lp-feature-tabs button[aria-selected="true"] {
+    border-bottom-color: #3b82f6;
+  }
+  .qrflow-landing .lp-feature-panel {
+    padding: 27px 20px 12px;
+  }
+  .qrflow-landing .lp-feature-intro .lp-eyebrow {
+    font-size: 9px;
+  }
+  .qrflow-landing .lp-feature-intro h3 {
+    font-size: 25px;
+  }
+  .qrflow-landing .lp-feature-intro p {
+    font-size: 12px;
+  }
+  .qrflow-landing .lp-feature-visual {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-top: 26px;
+  }
+  .qrflow-landing .lp-feature-qr {
+    width: 155px;
+    justify-self: center;
+  }
+  .qrflow-landing .lp-feature-options > .lp-mono {
+    font-size: 9px;
+  }
+  .qrflow-landing .lp-feature-options .lp-button {
+    font-size: 12px;
+    min-height: 44px;
+  }
+  .qrflow-landing .lp-feature-options .lp-text-link {
+    min-height: 44px;
+    justify-content: center;
+  }
+  .qrflow-landing .lp-mini-destination {
+    font-size: 11px;
+  }
+  .qrflow-landing .lp-feature-options > small {
+    text-align: center;
+  }
+  .qrflow-landing .lp-feature-options .lp-mono {
+    text-align: center;
+  }
+  .qrflow-landing .lp-lab-status {
+    font-size: 11px;
+    min-height: 40px;
+  }
+  .qrflow-landing .lp-chart {
+    padding: 20px;
+  }
+  .qrflow-landing .lp-segment button {
+    font-size: 10px;
+    min-height: 36px;
+    padding: 7px;
+  }
+  .qrflow-landing .lp-export .button-row {
+    justify-content: center;
+  }
+  .qrflow-landing .lp-export small {
+    display: block;
+    text-align: center;
+  }
+  .qrflow-landing .lp-color-fields input {
+    min-height: 44px;
+  }
+  .qrflow-landing .lp-color-valid {
+    font-size: 11px;
+  }
+  .qrflow-landing .lp-color-fields label {
+    font-size: 12px;
+  }
+  .qrflow-landing .lp-code-state {
+    padding-block: 10px;
+  }
+  .qrflow-landing .lp-story {
+    padding: 50px 0 15px;
+  }
+  .qrflow-landing .lp-story-heading h2 {
+    font-size: 32px;
+  }
+  .qrflow-landing .lp-scene {
+    grid-template-columns: 1fr;
+    padding: 45px 0;
+    gap: 30px;
+  }
+  .qrflow-landing .lp-scene-copy h3 {
+    font-size: 64px;
+    margin-block: 12px;
+  }
+  .qrflow-landing .lp-scene-copy p {
+    font-size: 14px;
+    max-width: 340px;
+  }
+  .qrflow-landing .lp-scene-copy > .lp-mono {
+    margin-top: 17px;
+    font-size: 7px;
+  }
+  .qrflow-landing .lp-scene-copy > .lp-eyebrow {
+    font-size: 10px;
+  }
+  .qrflow-landing .lp-scene-visual {
+    min-height: 300px;
+    padding-inline: 12px;
+  }
+  .qrflow-landing .lp-story-code {
+    max-width: 320px;
+    padding: 26px;
+  }
+  .qrflow-landing .lp-story-code > .qr-image {
+    width: 150px;
+  }
+  .qrflow-landing .lp-story-code small {
+    font-size: 9px;
+  }
+  .qrflow-landing .lp-story-code .lp-code-state {
+    padding: 0;
+  }
+  .qrflow-landing .lp-menu-print {
+    width: 270px;
+  }
+  .qrflow-landing .lp-scene-3 .lp-chart {
+    width: 100%;
+    max-width: none;
+  }
+  .qrflow-landing .lp-use-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-bottom: 20px;
+  }
+  .qrflow-landing .lp-use-tabs button {
+    padding: 14px 12px;
+    min-height: 48px;
+    font-size: 12px;
+  }
+  .qrflow-landing .lp-use-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .qrflow-landing .lp-use-art {
+    min-height: 410px;
+    padding: 30px;
+  }
+  .qrflow-landing .lp-use-print {
+    width: 260px;
+    padding: 25px;
+  }
+  .qrflow-landing .lp-use-print > strong {
+    font-size: 34px;
+  }
+  .qrflow-landing .lp-use-copy h3 {
+    font-size: 33px;
+    margin-top: 15px;
+  }
+  .qrflow-landing .lp-use-copy > p {
+    font-size: 14px;
+    margin-top: 17px;
+    max-width: none;
+  }
+  .qrflow-landing .lp-use-destination {
+    font-size: 11px;
+  }
+  .qrflow-landing .lp-carousel-controls {
+    margin-top: 20px;
+  }
+  .qrflow-landing .lp-carousel-controls button {
+    width: 44px;
+    height: 44px;
+  }
+  .qrflow-landing .lp-carousel-controls .lp-mono {
+    font-size: 8px;
+  }
+  .qrflow-landing .lp-pricing {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .qrflow-landing .lp-pricing h2 {
+    font-size: 54px;
+  }
+  .qrflow-landing .lp-pricing > div > p {
+    font-size: 14px;
+    margin-top: 20px;
+  }
+  .qrflow-landing .lp-price-card {
+    padding: 26px 23px;
+  }
+  .qrflow-landing .lp-price-top {
+    font-size: 9px;
+  }
+  .qrflow-landing .lp-price-card li {
+    font-size: 11px;
+  }
+  .qrflow-landing .lp-price {
+    font-size: 67px;
+  }
+  .qrflow-landing .lp-faq-section {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .qrflow-landing .lp-faq-item h3 {
+    font-size: 13px;
+  }
+  .qrflow-landing .lp-faq-item button {
+    min-height: 72px;
+    gap: 15px;
+  }
+  .qrflow-landing .lp-faq-answer p {
+    font-size: 13px;
+    padding-right: 15px;
+  }
+  .qrflow-landing .lp-final {
+    padding: 75px 0 65px;
+  }
+  .qrflow-landing .lp-final h2 {
+    font-size: 70px;
+    margin-top: 23px;
+  }
+  .qrflow-landing .lp-final > .lp-eyebrow {
+    font-size: 10px;
+  }
+  .qrflow-landing .lp-final-mark {
+    width: 130px;
+    top: 95px;
+    right: -10px;
+    opacity: 0.08;
+  }
+  .qrflow-landing .lp-footer {
+    gap: 20px;
+    padding-block: 30px;
+  }
+  .qrflow-landing .lp-footer nav {
+    margin-left: 0;
+    width: 100%;
+    gap: 24px;
+    order: 2;
+  }
+  .qrflow-landing .lp-footer > small {
+    margin-left: auto;
+  }
+  .qrflow-landing .lp-footer nav a {
+    min-height: 44px;
+  }
+}
+@media (max-width: 380px) {
+  .qrflow-landing .lp-nav {
+    gap: 8px;
+  }
+  .qrflow-landing .brand {
+    font-size: 18px;
+    gap: 6px;
+  }
+  .qrflow-landing .brand-mark {
+    width: 28px;
+    height: 28px;
+  }
+  .qrflow-landing .lp-small {
+    padding-inline: 10px;
+    font-size: 10px;
+    gap: 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .qrflow-landing,
+  .qrflow-landing * {
+    scroll-behavior: auto !important;
+  }
+  .qrflow-landing .lp-final-mark {
+    transform: none !important;
+  }
+  .qrflow-landing .lp-story-fill {
+    transform: scaleX(1);
+  }
+  .qrflow-landing .lp-line > span {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
